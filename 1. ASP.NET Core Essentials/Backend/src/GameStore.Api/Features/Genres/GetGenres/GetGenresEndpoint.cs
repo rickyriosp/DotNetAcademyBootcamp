@@ -8,9 +8,6 @@ public static class GetGenresEndpoint
     public static void MapGetGenres(this IEndpointRouteBuilder app, GameStoreData data)
     {
         // GET /genres
-        app.MapGet(
-            "/",
-            () => data.GetGenres().Select(g => new GenreDto(g.Id, g.Name)).ToList()
-        );
+        app.MapGet("/", () => data.GetGenres().Select(g => new GenreDto(g.Id, g.Name)).ToList());
     }
 }
