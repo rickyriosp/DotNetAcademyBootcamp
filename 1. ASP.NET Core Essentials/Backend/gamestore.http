@@ -7,8 +7,7 @@ GET http://localhost:5273/games
 
 ###
 # GET game by id
-GET http://localhost:5273/games/49d3556d-39b6-407a-9e1c-aadd280d59ce
-
+GET http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
 ###
 # POST a new game
 POST http://localhost:5273/games
@@ -24,7 +23,7 @@ Content-Type: application/json
 
 ###
 // PUT game by id
-PUT http://localhost:5273/games/dcc0ded0-1f6a-4558-b5cc-62ebbf503093
+PUT http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
 Content-Type: application/json
 
 {
@@ -37,7 +36,7 @@ Content-Type: application/json
 
 ###
 // DELETE game by id
-DELETE http://localhost:5273/games/0aa5a11f-c3b8-482f-bd67-19cac91f5f11
+DELETE http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
 
 ###
 // GET all genres
