@@ -23,6 +23,7 @@ public class GameStoreData
                 Id = Guid.NewGuid(),
                 Name = "Street Fighter II",
                 Genre = _genres[0],
+                GenreId = _genres[0].Id,
                 Price = 19.99m,
                 ReleaseDate = new DateOnly(1992, 7, 15),
                 Description = "A classic fighting game that revolutionized the genre."
@@ -33,6 +34,7 @@ public class GameStoreData
                 Id = Guid.NewGuid(),
                 Name = "Final Fantasy XIV",
                 Genre = _genres[1],
+                GenreId = _genres[1].Id,
                 Price = 59.99m,
                 ReleaseDate = new DateOnly(2010, 9, 30),
                 Description =
@@ -44,6 +46,7 @@ public class GameStoreData
                 Id = Guid.NewGuid(),
                 Name = "The Legend of Zelda: Breath of the Wild",
                 Genre = _genres[2],
+                GenreId = _genres[2].Id,
                 Price = 49.99m,
                 ReleaseDate = new DateOnly(2017, 3, 3),
                 Description = "An open-world action-adventure game set in the land of Hyrule."

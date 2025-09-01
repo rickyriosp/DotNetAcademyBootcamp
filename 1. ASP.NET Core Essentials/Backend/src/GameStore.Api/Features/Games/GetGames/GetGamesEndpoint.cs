@@ -8,12 +8,12 @@ public static class GetGamesEndpoint
     {
         // GET /games
         app.MapGet("/", (GameStoreData data) => data.GetGames()
-            .Select(g => new GameSummaryDto(
-                g.Id,
-                g.Name,
-                g.Genre.Name,
-                g.Price,
-                g.ReleaseDate
+            .Select(game => new GameSummaryDto(
+                game.Id,
+                game.Name,
+                game.Genre!.Name, // ! -> null forgiveness operator
+                game.Price,
+                game.ReleaseDate
             ))
             .ToList()
         );
