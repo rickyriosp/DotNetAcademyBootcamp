@@ -1,4 +1,3 @@
-using GameStore.Api.Data;
 using GameStore.Api.Features.Games.CreateGame;
 using GameStore.Api.Features.Games.DeleteGame;
 using GameStore.Api.Features.Games.GetGame;
@@ -9,23 +8,23 @@ namespace GameStore.Api.Features.Games;
 
 public static class GamesEndpoints
 {
-    public static void MapGames(this IEndpointRouteBuilder app, GameStoreData data)
+    public static void MapGames(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/games");
 
         // GET /games
-        group.MapGetGames(data);
+        group.MapGetGames();
 
         // GET /games/{id}
-        group.MapGetGame(data);
+        group.MapGetGame();
 
         // POST /games
-        group.MapCreateGame(data);
+        group.MapCreateGame();
 
         // PUT /games/{id}
-        group.MapUpdateGame(data);
+        group.MapUpdateGame();
 
         // DELETE /games/{id}
-        group.MapDeleteGame(data);
+        group.MapDeleteGame();
     }
 }

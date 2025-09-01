@@ -7,36 +7,37 @@ GET http://localhost:5273/games
 
 ###
 # GET game by id
-GET http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
+GET http://localhost:5273/games/da99b1de-ae41-402c-b19d-4f3c22e39be7
+
 ###
 # POST a new game
 POST http://localhost:5273/games
 Content-Type: application/json
 
 {
-    "name": "FIFA 2025",
-    "genreId": "254426b7-23a4-404f-9b01-f80f754109aa",
-    "price": 59.99,
-    "releaseDate": "2025-09-27",
-    "description": "The latest installment in the FIFA series."
+  "name": "FIFA 2025",
+  "genreId": "254426b7-23a4-404f-9b01-f80f754109aa",
+  "price": 59.99,
+  "releaseDate": "2025-09-27",
+  "description": "The latest installment in the FIFA series."
 }
 
 ###
 // PUT game by id
-PUT http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
+PUT http://localhost:5273/games/e0141e90-b3b5-4d1b-beca-1a31e262d405
 Content-Type: application/json
 
 {
-    "name": "FIFA 2025",
-    "genreId": "254426b7-23a4-404f-9b01-f80f754109aa",
-    "price": 69.99,
-    "releaseDate": "2025-09-27",
-    "description": "The latest installment in the FIFA series."
+  "name": "FIFA 2025",
+  "genreId": "254426b7-23a4-404f-9b01-f80f754109aa",
+  "price": 69.99,
+  "releaseDate": "2025-09-27",
+  "description": "The latest installment in the FIFA series."
 }
 
 ###
 // DELETE game by id
-DELETE http://localhost:5273/games/4e03b248-cc3f-49a5-ac4f-06ec34c82b38
+DELETE http://localhost:5273/games/e0141e90-b3b5-4d1b-beca-1a31e262d405
 
 ###
 // GET all genres

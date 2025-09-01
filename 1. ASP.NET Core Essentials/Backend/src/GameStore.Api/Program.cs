@@ -2,14 +2,17 @@ using GameStore.Api.Data;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
 
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-GameStoreData data = new();
+// Register Services
+builder.Services.AddTransient<GameDataLogger>();
+builder.Services.AddSingleton<GameStoreData>();
+
+var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGames(data);
-app.MapGenres(data);
+app.MapGames();
+app.MapGenres();
 
 app.Run();
