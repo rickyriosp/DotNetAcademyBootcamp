@@ -49,6 +49,12 @@ namespace GameStore.Api.Data.Migrations
                 name: "IX_Games_GenreId",
                 table: "Games",
                 column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Genres_Name",
+                table: "Genres",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />

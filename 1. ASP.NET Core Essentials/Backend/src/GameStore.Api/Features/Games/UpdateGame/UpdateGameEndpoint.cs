@@ -8,30 +8,22 @@ public static class UpdateGameEndpoint
     public static void MapUpdateGame(this IEndpointRouteBuilder app)
     {
         // PUT /games/{id}
-        app.MapPut("/{id}", (Guid id, UpdateGameDto updatedGameDto, GameStoreData data) =>
+        app.MapPut("/{id}", (Guid id, UpdateGameDto updatedGameDto, GameStoreContext dbContext) =>
             {
-                Game? existingGame = data.GetGame(id);
+                Game? existingGame = dbContext.Games.Find(id);
 
                 if (existingGame is null)
                 {
                     return Results.NotFound();
                 }
 
-                Genre? genre = data.GetGenre(updatedGameDto.GenreId);
-
-                if (genre is null)
-                {
-                    return Results.BadRequest(
-                        $"Genre with ID {updatedGameDto.GenreId} does not exist."
-                    );
-                }
-
                 existingGame.Name = updatedGameDto.Name;
-                existingGame.Genre = genre;
-                existingGame.GenreId = genre.Id;
+                existingGame.GenreId = updatedGameDto.GenreId;
                 existingGame.Price = updatedGameDto.Price;
                 existingGame.ReleaseDate = updatedGameDto.ReleaseDate;
                 existingGame.Description = updatedGameDto.Description;
+
+                dbContext.SaveChanges();
 
                 return Results.NoContent();
             })

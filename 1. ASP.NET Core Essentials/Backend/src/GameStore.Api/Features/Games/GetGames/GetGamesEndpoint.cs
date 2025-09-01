@@ -1,5 +1,7 @@
 using GameStore.Api.Data;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace GameStore.Api.Features.Games.GetGames;
 
 public static class GetGamesEndpoint
@@ -7,7 +9,8 @@ public static class GetGamesEndpoint
     public static void MapGetGames(this IEndpointRouteBuilder app)
     {
         // GET /games
-        app.MapGet("/", (GameStoreData data) => data.GetGames()
+        app.MapGet("/", (GameStoreContext dbContext) => dbContext.Games
+            .Include(game => game.Genre)
             .Select(game => new GameSummaryDto(
                 game.Id,
                 game.Name,
@@ -15,6 +18,7 @@ public static class GetGamesEndpoint
                 game.Price,
                 game.ReleaseDate
             ))
+            .AsNoTracking()
             .ToList()
         );
     }
