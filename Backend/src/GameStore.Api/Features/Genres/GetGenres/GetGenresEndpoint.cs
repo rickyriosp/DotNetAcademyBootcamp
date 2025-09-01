@@ -9,10 +9,10 @@ public static class GetGenresEndpoint
     public static void MapGetGenres(this IEndpointRouteBuilder app)
     {
         // GET /genres
-        app.MapGet("/", (GameStoreContext dbContext) => dbContext.Genres
+        app.MapGet("/", async (GameStoreContext dbContext) => await dbContext.Genres
             .Select(g => new GenreDto(g.Id, g.Name))
             .AsNoTracking()
-            .ToList()
+            .ToListAsync()
         );
     }
 }

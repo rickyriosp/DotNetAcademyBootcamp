@@ -6,21 +6,21 @@ namespace GameStore.Api.Data;
 
 public static class DataExtensions
 {
-    public static void InitializeDb(this WebApplication app)
+    public static async Task InitializeDbAsync(this WebApplication app)
     {
-        app.MigrateDb();
-        app.SeedDb();
+        await app.MigrateDbAsync();
+        await app.SeedDbAsync();
     }
 
-    private static void MigrateDb(this WebApplication app)
+    private static async Task MigrateDbAsync(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
         GameStoreContext dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
 
-        dbContext.Database.Migrate();
+        await dbContext.Database.MigrateAsync();
     }
 
-    private static void SeedDb(this WebApplication app)
+    private static async Task SeedDbAsync(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
         GameStoreContext dbContext = scope.ServiceProvider.GetRequiredService<GameStoreContext>();
@@ -34,45 +34,47 @@ public static class DataExtensions
                 new Genre { Name = "Sports" }
             );
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
-        if (!dbContext.Games.Any())
+        if (dbContext.Games.Any())
         {
-            var genres = dbContext.Genres.ToList();
-
-            dbContext.Games.AddRange(
-                new Game
-                {
-                    Name = "Street Fighter II",
-                    // Genre = genres.Find(g => g.Name == "Fighting"),
-                    GenreId = genres.Find(g => g.Name == "Fighting")!.Id,
-                    Price = 19.99m,
-                    ReleaseDate = new DateOnly(1992, 7, 15),
-                    Description = "A classic fighting game that revolutionized the genre."
-                },
-                new Game
-                {
-                    Name = "Final Fantasy XIV",
-                    // Genre = genres.Find(g => g.Name == "Role-Playing"),
-                    GenreId = genres.Find(g => g.Name == "Role-Playing")!.Id,
-                    Price = 59.99m,
-                    ReleaseDate = new DateOnly(2010, 9, 30),
-                    Description =
-                        "A massively multiplayer online role-playing game set in the world of Eorzea."
-                },
-                new Game
-                {
-                    Name = "The Legend of Zelda: Breath of the Wild",
-                    // Genre = genres.Find(g => g.Name == "Action-Adventure"),
-                    GenreId = genres.Find(g => g.Name == "Action-Adventure")!.Id,
-                    Price = 49.99m,
-                    ReleaseDate = new DateOnly(2017, 3, 3),
-                    Description = "An open-world action-adventure game set in the land of Hyrule."
-                }
-            );
-
-            dbContext.SaveChanges();
+            return;
         }
+
+        var genres = dbContext.Genres.ToList();
+
+        dbContext.Games.AddRange(
+            new Game
+            {
+                Name = "Street Fighter II",
+                // Genre = genres.Find(g => g.Name == "Fighting"),
+                GenreId = genres.Find(g => g.Name == "Fighting")!.Id,
+                Price = 19.99m,
+                ReleaseDate = new DateOnly(1992, 7, 15),
+                Description = "A classic fighting game that revolutionized the genre."
+            },
+            new Game
+            {
+                Name = "Final Fantasy XIV",
+                // Genre = genres.Find(g => g.Name == "Role-Playing"),
+                GenreId = genres.Find(g => g.Name == "Role-Playing")!.Id,
+                Price = 59.99m,
+                ReleaseDate = new DateOnly(2010, 9, 30),
+                Description =
+                    "A massively multiplayer online role-playing game set in the world of Eorzea."
+            },
+            new Game
+            {
+                Name = "The Legend of Zelda: Breath of the Wild",
+                // Genre = genres.Find(g => g.Name == "Action-Adventure"),
+                GenreId = genres.Find(g => g.Name == "Action-Adventure")!.Id,
+                Price = 49.99m,
+                ReleaseDate = new DateOnly(2017, 3, 3),
+                Description = "An open-world action-adventure game set in the land of Hyrule."
+            }
+        );
+
+        await dbContext.SaveChangesAsync();
     }
 }
