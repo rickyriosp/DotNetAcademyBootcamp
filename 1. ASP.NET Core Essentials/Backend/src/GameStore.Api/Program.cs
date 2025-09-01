@@ -24,8 +24,6 @@ builder.Services.AddSqlite<GameStoreContext>(connString);
 
 // Register Services
 builder.Services.AddTransient<GameDataLogger>();
-builder.Services.AddSingleton<GameStoreData>();
-
 
 var app = builder.Build();
 
@@ -33,6 +31,6 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapGames();
 app.MapGenres();
-app.MigrateDb();
+app.InitializeDb();
 
 app.Run();

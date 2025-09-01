@@ -60,6 +60,9 @@ namespace GameStore.Api.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Genres");
                 });
 
