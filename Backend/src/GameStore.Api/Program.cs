@@ -31,6 +31,7 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapGames();
 app.MapGenres();
+
 await app.InitializeDbAsync();
 
 app.Run();
