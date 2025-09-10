@@ -11,9 +11,7 @@ public static class GetGameEndpoint
         // GET /games/{id}
         app.MapGet("/{id}", (Guid id, GameStoreContext dbContext) =>
             {
-                Task<Game?> findGameTask = dbContext.Games
-                    .FindAsync(id)
-                    .AsTask();
+                Task<Game?> findGameTask = FindGameTask(dbContext, id);
 
                 return findGameTask.ContinueWith(task =>
                 {
@@ -31,8 +29,18 @@ public static class GetGameEndpoint
                                 game.Description
                             )
                         );
-                });
+                }, TaskContinuationOptions.OnlyOnRanToCompletion);
             })
             .WithName(EndpointNames.GetGame);
+    }
+
+    private static Task<Game?> FindGameTask(GameStoreContext dbContext, Guid id)
+    {
+        Task<Game?> findGameTask = dbContext.Games
+            .FindAsync(id)
+            .AsTask();
+
+        // throw new SqliteException("The database is not available!", 14);
+        return findGameTask;
     }
 }

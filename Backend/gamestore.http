@@ -7,7 +7,7 @@ GET http://localhost:5273/games
 
 ###
 # GET game by id
-GET http://localhost:5273/games/ae615188-790e-4aa8-b463-bb25f48cbf62
+GET http://localhost:5273/games/3d6291ea-0515-4abd-b367-eb3d61808359
 
 ###
 # POST a new game

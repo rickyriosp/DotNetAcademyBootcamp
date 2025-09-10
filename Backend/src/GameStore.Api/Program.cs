@@ -1,10 +1,14 @@
 using GameStore.Api.Data;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
+using GameStore.Api.Shared.ErrorHandling;
 
 using Microsoft.AspNetCore.HttpLogging;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 var connString = builder.Configuration.GetConnectionString("GameStore");
 
@@ -48,6 +52,13 @@ app.UseHttpLogging();
 
 // Request delegate middleware
 // app.UseMiddleware<RequestTimingMiddleware>();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler();
+}
+
+app.UseStatusCodePages();
 
 // Terminal middleware -> will never invoke the next middleware in the pipeline
 app.Run();
