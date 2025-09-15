@@ -3,7 +3,7 @@ GET http://localhost:5273
 
 ###
 # GET all games
-GET http://localhost:5273/games
+GET http://localhost:5273/games?pageNumber=1&pageSize=3&name=street
 
 ###
 # GET game by id

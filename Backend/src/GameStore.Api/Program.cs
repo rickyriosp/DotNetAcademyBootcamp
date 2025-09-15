@@ -61,7 +61,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePages();
 
 // Terminal middleware -> will never invoke the next middleware in the pipeline
-app.Run();
+// app.Run();
 
 
 await app.InitializeDbAsync();

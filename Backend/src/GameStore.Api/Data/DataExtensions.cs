@@ -32,7 +32,8 @@ public static class DataExtensions
                 new Genre { Name = "Fighting" },
                 new Genre { Name = "Role-Playing" },
                 new Genre { Name = "Action-Adventure" },
-                new Genre { Name = "Sports" }
+                new Genre { Name = "Sports" },
+                new Genre { Name = "Racing" }
             );
 
             await dbContext.SaveChangesAsync();
@@ -73,6 +74,33 @@ public static class DataExtensions
                 Price = 49.99m,
                 ReleaseDate = new DateOnly(2017, 3, 3),
                 Description = "An open-world action-adventure game set in the land of Hyrule."
+            },
+            new Game
+            {
+                Name = "FIFA 25",
+                // Genre = genres.Find(g => g.Name == "Sports"),
+                GenreId = genres.Find(g => g.Name == "Sports")!.Id,
+                Price = 69.99m,
+                ReleaseDate = new DateOnly(2024, 9, 27),
+                Description = "The latest installment in the popular football simulation series."
+            },
+            new Game
+            {
+                Name = "Forza Horizon 5",
+                // Genre = genres.Find(g => g.Name == "Racing"),
+                GenreId = genres.Find(g => g.Name == "Racing")!.Id,
+                Price = 59.99m,
+                ReleaseDate = new DateOnly(2021, 11, 9),
+                Description = "An open-world racing game set in a fictionalized version of Mexico."
+            },
+            new Game
+            {
+                Name = "Mario Kart 8 Deluxe",
+                // Genre = genres.Find(g => g.Name == "Racing"),
+                GenreId = genres.Find(g => g.Name == "Racing")!.Id,
+                Price = 59.99m,
+                ReleaseDate = new DateOnly(2017, 4, 28),
+                Description = "A fun and exciting kart racing game featuring popular Nintendo characters."
             }
         );
 
