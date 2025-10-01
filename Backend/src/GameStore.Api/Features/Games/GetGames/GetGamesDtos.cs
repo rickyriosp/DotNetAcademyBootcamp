@@ -5,7 +5,8 @@ public record GameSummaryDto(
     string Name,
     string Genre,
     decimal Price,
-    DateOnly ReleaseDate
+    DateOnly ReleaseDate,
+    string ImageUri
 );
 
 public record GetGamesDto(int PageNumber = 1, int PageSize = 5, string? Name = null);

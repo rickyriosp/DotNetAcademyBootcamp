@@ -2,6 +2,7 @@ using GameStore.Api.Data;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
 using GameStore.Api.Shared.ErrorHandling;
+using GameStore.Api.Shared.FileUpload;
 
 using Microsoft.AspNetCore.HttpLogging;
 
@@ -39,6 +40,12 @@ builder.Services.AddHttpLogging(options =>
     options.CombineLogs = true;
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<FileUploader>();
+
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
@@ -46,14 +53,20 @@ app.MapGet("/", () => "Hello World!");
 app.MapGames();
 app.MapGenres();
 
-
 // Add Middleware
+app.UseStaticFiles();
 app.UseHttpLogging();
 
 // Request delegate middleware
 // app.UseMiddleware<RequestTimingMiddleware>();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler();
 }
@@ -62,7 +75,6 @@ app.UseStatusCodePages();
 
 // Terminal middleware -> will never invoke the next middleware in the pipeline
 // app.Run();
-
 
 await app.InitializeDbAsync();
 

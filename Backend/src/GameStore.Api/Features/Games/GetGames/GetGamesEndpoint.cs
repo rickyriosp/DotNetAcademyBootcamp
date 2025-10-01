@@ -30,7 +30,8 @@ public static class GetGamesEndpoint
                         game.Name,
                         game.Genre!.Name, // ! -> null forgiveness operator
                         game.Price,
-                        game.ReleaseDate
+                        game.ReleaseDate,
+                        game.ImageUri
                     ))
                     .AsNoTracking()
                     .ToListAsync();

@@ -46,6 +46,8 @@ public static class DataExtensions
 
         var genres = dbContext.Genres.ToList();
 
+        var defaultImageUri = "https://placehold.co/100";
+
         dbContext.Games.AddRange(
             new Game
             {
@@ -54,7 +56,8 @@ public static class DataExtensions
                 GenreId = genres.Find(g => g.Name == "Fighting")!.Id,
                 Price = 19.99m,
                 ReleaseDate = new DateOnly(1992, 7, 15),
-                Description = "A classic fighting game that revolutionized the genre."
+                Description = "A classic fighting game that revolutionized the genre.",
+                ImageUri = defaultImageUri
             },
             new Game
             {
@@ -64,7 +67,8 @@ public static class DataExtensions
                 Price = 59.99m,
                 ReleaseDate = new DateOnly(2010, 9, 30),
                 Description =
-                    "A massively multiplayer online role-playing game set in the world of Eorzea."
+                    "A massively multiplayer online role-playing game set in the world of Eorzea.",
+                ImageUri = defaultImageUri
             },
             new Game
             {
@@ -73,7 +77,8 @@ public static class DataExtensions
                 GenreId = genres.Find(g => g.Name == "Action-Adventure")!.Id,
                 Price = 49.99m,
                 ReleaseDate = new DateOnly(2017, 3, 3),
-                Description = "An open-world action-adventure game set in the land of Hyrule."
+                Description = "An open-world action-adventure game set in the land of Hyrule.",
+                ImageUri = defaultImageUri
             },
             new Game
             {
@@ -82,7 +87,8 @@ public static class DataExtensions
                 GenreId = genres.Find(g => g.Name == "Sports")!.Id,
                 Price = 69.99m,
                 ReleaseDate = new DateOnly(2024, 9, 27),
-                Description = "The latest installment in the popular football simulation series."
+                Description = "The latest installment in the popular football simulation series.",
+                ImageUri = defaultImageUri
             },
             new Game
             {
@@ -91,7 +97,8 @@ public static class DataExtensions
                 GenreId = genres.Find(g => g.Name == "Racing")!.Id,
                 Price = 59.99m,
                 ReleaseDate = new DateOnly(2021, 11, 9),
-                Description = "An open-world racing game set in a fictionalized version of Mexico."
+                Description = "An open-world racing game set in a fictionalized version of Mexico.",
+                ImageUri = defaultImageUri
             },
             new Game
             {
@@ -100,7 +107,8 @@ public static class DataExtensions
                 GenreId = genres.Find(g => g.Name == "Racing")!.Id,
                 Price = 59.99m,
                 ReleaseDate = new DateOnly(2017, 4, 28),
-                Description = "A fun and exciting kart racing game featuring popular Nintendo characters."
+                Description = "A fun and exciting kart racing game featuring popular Nintendo characters.",
+                ImageUri = defaultImageUri
             }
         );
 
